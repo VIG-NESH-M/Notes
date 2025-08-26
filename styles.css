@@ -1,0 +1,340 @@
+/* Notes App Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+    background-color: #45bd3291;
+    min-height: 100vh;
+}
+
+.container {
+    height: 100vh;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.notes-container {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: white;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #45bd3227;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #43ac33;
+    border-right: 4px solid #43ac33;
+    margin-bottom: 20px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.title img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    object-fit: contain;
+}
+
+.title h1 {
+    color: #43ac33;
+    font-size: 1.8rem;
+}
+
+.btn button {
+    border: none;
+    outline: none;
+    background-image: linear-gradient(to right, #44bd32 0%, #6ad55a 51%, #5ae245 100%);
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.btn button:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.btn button:active {
+    transform: translateY(0);
+}
+
+.notes-box {
+    margin-top: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.notes-box:empty::before {
+    content: "No notes yet. Click 'Create Notes' to get started!";
+    display: block;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border: 2px dashed #ddd;
+}
+
+.note {
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    color: #fff;
+    min-height: 100px;
+    background-color: #44bd32;
+    position: relative;
+    outline-color: #5ae245b9;
+    outline-offset: 3px;
+    transition: all 0.3s ease;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+.note-content {
+    width: 100%;
+    height: 100%;
+    min-height: 70px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding-right: 35px; /* Space for delete button */
+}
+
+.note-content:empty::before {
+    content: attr(data-placeholder);
+    opacity: 0.7;
+    font-style: italic;
+}
+
+.note:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.note:focus-within {
+    outline: 2px solid #5ae245b9;
+    outline-offset: 3px;
+}
+
+.delete-btn {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding: 5px;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.delete-btn-text {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.delete-btn:hover,
+.delete-btn-text:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.delete-btn:focus,
+.delete-btn-text:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+.notes-box::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.notes-box::-webkit-scrollbar {
+    width: 8px;
+    background-color: #ffffff;
+}
+
+.notes-box::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #45bd3227;
+}
+
+/* Counter boxes */
+.counter-box {
+    position: absolute;
+    transform: translateX(100%);
+    right: 0;
+    height: 40px;
+    width: 40px;
+    z-index: 10;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.counter-box:hover {
+    transform: translateX(90%);
+}
+
+.created-count {
+    top: 35px;
+    background-color: #ffcc00;
+}
+
+.deleted-count {
+    top: 85px;
+    background-color: #cc3300;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 5px;
+        align-items: flex-start;
+    }
+    
+    .notes-container {
+        margin-top: 20px;
+        padding: 15px;
+        max-width: 100%;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .title h1 {
+        font-size: 1.5rem;
+    }
+    
+    .btn button {
+        margin: 0;
+        padding: 12px 30px;
+        font-size: 0.8rem;
+    }
+    
+    .counter-box {
+        position: fixed;
+        transform: none;
+        z-index: 1000;
+    }
+    
+    .created-count {
+        top: 20px;
+        right: 20px;
+    }
+    
+    .deleted-count {
+        top: 70px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .notes-container {
+        margin-top: 10px;
+        padding: 10px;
+    }
+    
+    .title img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .title h1 {
+        font-size: 1.3rem;
+    }
+    
+    .note {
+        min-height: 80px;
+        padding: 12px;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus visible for keyboard navigation */
+.btn button:focus-visible,
+.note:focus-visible,
+.delete-btn:focus-visible {
+    outline: 3px solid #43ac33;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .note {
+        border: 2px solid #000;
+    }
+    
+    .delete-btn {
+        border: 2px solid #fff;
+    }
+}

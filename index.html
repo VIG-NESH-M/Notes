@@ -4,242 +4,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes</title>
+    <meta name="description" content="A simple and intuitive note-taking application with local storage">
+    <meta name="keywords" content="notes, notepad, text editor, local storage, productivity">
+    <meta name="author" content="Notes App">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Notes App - Simple Note Taking">
+    <meta property="og:description" content="A simple and intuitive note-taking application with local storage">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Notes App - Simple Note Taking">
+    <meta name="twitter:description" content="A simple and intuitive note-taking application with local storage">
+    
+    <title>Notes App - Simple Note Taking</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="notes.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    }
-
-    body {
-        background-color: #45bd3291;
-    }
-
-    .container {
-        /* background-color: #45bd32; */
-        height: 100vh;
-        padding: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: start;
-
-    }
-
-    .notes-container {
-        width: 600px;
-        margin-top: 100px;
-        padding: 20px;
-        border-radius: 20px;
-        background-color: white;
-        position: relative;
-    }
-
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #45bd3227;
-        padding: 15px;
-        border-radius: 10px;
-        border-left: 4px solid #43ac33;
-        border-right: 4px solid #43ac33;
-
-    }
-
-    .title {
-        display: flex;
-        align-items: center;
-    }
-
-    .title img {
-        width: 50px;
-        margin-right: 10px;
-    }
-
-    .title h1 {
-        color: #43ac33;
-    }
-
-    /* 
-    .btn button {
-        border: none;
-        outline: none;
-        background-color: #44bd32;
-        color: #fff;
-        padding: 10px;
-        border-radius: 10px;
-    } */
-
-
-    .btn button {
-        border: none;
-        outline: none;
-        background-image: linear-gradient(to right, #44bd32 0%, #6ad55a 51%, #5ae245 100%);
-        margin: 10px;
-        padding: 15px 45px;
-        text-align: center;
-        text-transform: uppercase;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;
-        box-shadow: 0 0 20px #eee;
-        border-radius: 10px;
-        display: block;
-        cursor: pointer;
-    }
-
-    .btn button:hover {
-        background-position: right center;
-        /* change the direction of the change here */
-        color: #fff;
-        text-decoration: none;
-    }
-
-    .notes-box {
-        margin-top: 0px;
-        max-height: 400px;
-        overflow-y: scroll;
-        scroll-behavior: smooth;
-        padding: 10px;
-    }
-
-    .notes-box p {
-        margin-top: 10px;
-        padding: 10px;
-        border-radius: 10px;
-        color: #fff;
-        min-height: 100px;
-        background-color: #44bd32;
-        position: relative;
-        outline-color: #5ae245b9;
-        outline-offset: 3px;
-    }
-
-    .notes-box p img {
-        width: 25px;
-        position: absolute;
-        bottom: 5px;
-        right: 5px;
-        cursor: pointer;
-    }
-
-    .notes-box::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
-        background-color: #ffffff;
-    }
-
-    .notes-box::-webkit-scrollbar {
-        padding: 20px;
-        width: 8px;
-        background-color: #ffffff;
-    }
-
-    .notes-box::-webkit-scrollbar-thumb {
-        border-radius: 5px;
-        background-color: #45bd3227;
-    }
-
-    .box-1,
-    .box-2 {
-        position: absolute;
-        transform: translate(100%);
-        right: 0;
-        height: 40px;
-        width: 40px;
-        z-index: -1;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .box-1 {
-        top: 35px;
-        background-color: #ffcc00;
-        font-size: 18px;
-
-    }
-
-    .box-2 {
-        top: 85px;
-        background-color: #cc3300;
-    }
-</style>
 
 <body>
-
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">Skip to main content</a>
+    
     <div class="container">
-        <div class="notes-container">
-            <div class="box-1">0</div>
-            <div class="box-2">0</div>
-            <div class="header">
+        <main class="notes-container" id="main-content">
+            <!-- Counter indicators -->
+            <div class="counter-box created-count" title="Notes created" aria-label="0 notes created">0</div>
+            <div class="counter-box deleted-count" title="Notes deleted" aria-label="0 notes deleted">0</div>
+            
+            <!-- Header section -->
+            <header class="header">
                 <div class="title">
-                    <img src="notes.png">
-                    <h1> Notes </h1>
+                    <img src="notes.png" alt="Notes App Icon" width="50" height="50">
+                    <h1>Notes</h1>
                 </div>
                 <div class="btn">
-                    <button onclick="addNotes()">Create Notes</button>
+                    <button class="create-btn" type="button" aria-label="Create a new note" title="Create new note (Ctrl+N)">
+                        Create Notes
+                    </button>
                 </div>
-            </div>
-            <div class="notes-box" id="notes-box">
-                <!-- <p contenteditable="true">No notes
-                    <img src="dltpng.png">
-                </p> -->
-            </div>
+            </header>
+            
+            <!-- Notes container -->
+            <section class="notes-box" id="notes-box" role="region" aria-label="Your notes" aria-live="polite">
+                <!-- Notes will be dynamically added here -->
+            </section>
+        </main>
+    </div>
+    
+    <!-- Loading indicator for better UX -->
+    <div id="loading" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            Loading...
         </div>
     </div>
+    
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    
+    <!-- Service worker for PWA capabilities (future enhancement) -->
     <script>
-        const createCount = document.getElementsByClassName('box-1');
-        const deleteCount = document.getElementsByClassName('box-2');
-        let cCount = 0;
-        let dCount = 0;
-
-        const notesBox = document.getElementById("notes-box");
-        (function () {
-            cCount = Number(localStorage.getItem('count'));
-            if (cCount) {
-                createCount[0].innerHTML = cCount
-            }
-            notesBox.innerHTML = localStorage.getItem("notes")
-        })();
-        function addNotes() {
-            cCount += 1
-            var notes = document.createElement("p");
-            notes.setAttribute('contenteditable', 'true');
-            let image = document.createElement("img");
-            image.src = 'dltpng.png';
-            notes.appendChild(image);
-            notesBox.appendChild(notes);
-            createCount[0].innerHTML = cCount;
-            save();
-        }
-
-        notesBox.addEventListener('click', function (e) {
-            if (e.target.tagName === 'IMG') {
-                dCount += 1
-                cCount -= 1
-                e.target.parentElement.remove();
-                createCount[0].innerHTML = cCount;
-                deleteCount[0].innerHTML = dCount;
-                save();
-            } else if (e.target.tagName === 'P') {
-                addEventListener('keyup', function () {
-                    save();
-                })
-            }
-        })
-
-        function save() {
-            localStorage.setItem('count', cCount)
-            localStorage.setItem("notes", notesBox.innerHTML);
+        // Register service worker if supported
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Service worker registration would go here for PWA capabilities
+                console.log('Service Worker support detected');
+            });
         }
     </script>
-
 </body>
 
 </html>
